@@ -56,7 +56,7 @@ public class ReservationControllerTest {
             .when().post("/reservations")
             .then().log().all()
             .statusCode(201)
-            .body("member.name", is("normal1")); // TODO 영어로 바꾸기
+            .body("memberName", is("normal1")); // TODO 영어로 바꾸기
 
         RestAssured.given().log().all()
             .when().get("/reservations")

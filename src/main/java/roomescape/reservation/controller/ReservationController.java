@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import roomescape.auth.model.Principal;
 import roomescape.global.annotation.Login;
-import roomescape.member.dto.response.MemberGetResponse;
 import roomescape.reservation.dto.request.ReservationCreateRequest;
 import roomescape.reservation.dto.response.MyReservationGetResponse;
 import roomescape.reservation.dto.response.ReservationGetResponse;
+import roomescape.reservation.model.Reservation;
 import roomescape.reservation.model.Theme;
 import roomescape.reservation.service.ReservationService;
 
@@ -34,24 +34,36 @@ public class ReservationController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ReservationGetResponse createReservation(@RequestBody @Valid ReservationCreateRequest requestBody, @Login Principal principal) {
-        return ReservationGetResponse.from(reservationService.createReservationAfterNow(requestBody, principal.memberId()));
+        Reservation newReservation = reservationService.createReservationAfterNow(requestBody, principal.memberId());
+        return new ReservationGetResponse(
+                newReservation.getId(),
+                newReservation.getMember().getName(),
+                newReservation.getDate(),
+                newReservation.getTime().getStartAt(),
+                newReservation.getTheme().getName());
     }
 
     @GetMapping
     public List<ReservationGetResponse> readAllReservations() {
         return reservationService.findAllReservations().stream()
-                .map(ReservationGetResponse::from)
+                .map(reservation -> new ReservationGetResponse(
+                        reservation.getId(),
+                        reservation.getMember().getName(),
+                        reservation.getDate(),
+                        reservation.getTime().getStartAt(),
+                        reservation.getTheme().getName()))
                 .toList();
     }
 
     @GetMapping("/mine")
     public List<MyReservationGetResponse> readMyReservations(@Login Principal principal) {
         return reservationService.findByMemberId(principal.memberId()).stream()
-                .map(reservation -> new MyReservationGetResponse(reservation.getId(),
-                        MemberGetResponse.from(reservation.getMember()),
+                .map(reservation -> new MyReservationGetResponse(
+                        reservation.getId(),
+                        reservation.getMember().getName(),
                         reservation.getDate(),
-                        reservation.getTime(),
-                        reservation.getTheme(),
+                        reservation.getTime().getStartAt(),
+                        reservation.getTheme().getName(),
                         "Reserved"))
                 .toList();
     }

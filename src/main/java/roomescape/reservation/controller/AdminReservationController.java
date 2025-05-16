@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import roomescape.reservation.dto.request.AdminReservationCreateRequest;
 import roomescape.reservation.dto.response.ReservationGetResponse;
+import roomescape.reservation.model.Reservation;
 import roomescape.reservation.service.ReservationService;
 
 import java.time.LocalDate;
@@ -29,7 +30,14 @@ public class AdminReservationController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     private ReservationGetResponse createAdminReservation(@RequestBody @Valid AdminReservationCreateRequest requestBody) {
-        return ReservationGetResponse.from(reservationService.createReservation(requestBody));
+        Reservation newReservation = reservationService.createReservation(requestBody);
+        return new ReservationGetResponse(
+                newReservation.getId(),
+                newReservation.getMember().getName(),
+                newReservation.getDate(),
+                newReservation.getTime().getStartAt(),
+                newReservation.getTheme().getName()
+        );
     }
 
     @GetMapping
@@ -38,7 +46,12 @@ public class AdminReservationController {
                                                                  @RequestParam(value = "startDate", required = false) LocalDate startDate,
                                                                  @RequestParam(value = "endDate", required = false) LocalDate endDate) {
         return reservationService.findReservationByMemberIdAndThemeIdAndStartDateAndEndDate(memberId, themeId, startDate, endDate).stream()
-                .map(ReservationGetResponse::from)
+                .map(reservation -> new ReservationGetResponse(
+                        reservation.getId(),
+                        reservation.getMember().getName(),
+                        reservation.getDate(),
+                        reservation.getTime().getStartAt(),
+                        reservation.getTheme().getName()))
                 .toList();
     }
 }
