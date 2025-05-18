@@ -1,5 +1,6 @@
 package roomescape.member.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -14,10 +15,14 @@ public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(length = 30)
     private String name;
+    @Column(length = 100)
     private String email;
+    @Column(length = 100)
     private String password;
     @Enumerated(value = EnumType.STRING)
+    @Column(length = 10)
     private Role role;
 
     protected Member() {
