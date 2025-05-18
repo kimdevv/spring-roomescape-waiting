@@ -1,6 +1,7 @@
 package roomescape.member.service;
 
 import org.springframework.stereotype.Service;
+import roomescape.auth.exception.InvalidCredentialsException;
 import roomescape.member.dao.MemberDao;
 import roomescape.member.model.Member;
 import roomescape.member.dto.request.MemberCreateRequest;
@@ -36,5 +37,10 @@ public class MemberService {
 
     public List<Member> findAllMembers() {
         return memberDao.findAll();
+    }
+
+    public Member findByEmailAndPassword(String email, String password) {
+        return memberDao.findByEmailAndPassword(email, password)
+                .orElseThrow(InvalidCredentialsException::new);
     }
 }
