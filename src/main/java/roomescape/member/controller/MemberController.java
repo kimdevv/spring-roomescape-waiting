@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import roomescape.member.dto.request.MemberCreateRequest;
 import roomescape.member.dto.response.MemberGetResponse;
+import roomescape.member.model.Member;
 import roomescape.member.service.MemberService;
 
 import java.util.List;
@@ -24,13 +25,15 @@ public class MemberController {
 
     @PostMapping
     public MemberGetResponse signUp(@RequestBody @Valid  MemberCreateRequest requestBody) {
-        return MemberGetResponse.from(memberService.createUser(requestBody));
+        Member member = memberService.createUser(requestBody);
+        return new MemberGetResponse(member.getId(), member.getName(), member.getEmail());
     }
 
     @GetMapping
     public List<MemberGetResponse> readAllMembers() {
-        return memberService.findAllMembers().stream()
-                .map(MemberGetResponse::from)
+        List<Member> members = memberService.findAllMembers();
+        return members.stream()
+                .map(member -> new MemberGetResponse(member.getId(), member.getName(), member.getEmail()))
                 .toList();
     }
 }

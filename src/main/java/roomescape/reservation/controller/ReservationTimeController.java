@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import roomescape.reservation.dto.request.ReservationTimeCreateRequest;
 import roomescape.reservation.dto.response.ReservationTimeGetResponse;
 import roomescape.reservation.dto.response.ReservationTimeWithIsBookedGetResponse;
+import roomescape.reservation.model.ReservationTime;
 import roomescape.reservation.service.ReservationTimeService;
 
 @RestController
@@ -32,13 +33,15 @@ public class ReservationTimeController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ReservationTimeGetResponse createReservationTime(@RequestBody @Valid ReservationTimeCreateRequest requestBody) {
-        return ReservationTimeGetResponse.from(reservationTimeService.createReservationTime(requestBody));
+        ReservationTime reservationTime = reservationTimeService.createReservationTime(requestBody);
+        return new ReservationTimeGetResponse(reservationTime.getId(), reservationTime.getStartAt());
     }
 
     @GetMapping
     public List<ReservationTimeGetResponse> readAllReservationTimes() {
-        return reservationTimeService.findAllReservationTimes().stream()
-            .map(ReservationTimeGetResponse::from)
+        List<ReservationTime> reservationTimes = reservationTimeService.findAllReservationTimes();
+        return reservationTimes.stream()
+            .map(reservationTime -> new ReservationTimeGetResponse(reservationTime.getId(), reservationTime.getStartAt()))
             .toList();
     }
 
