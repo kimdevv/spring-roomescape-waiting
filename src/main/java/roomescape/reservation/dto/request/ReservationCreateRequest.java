@@ -6,8 +6,8 @@ import java.time.LocalDate;
 import jakarta.validation.constraints.NotNull;
 
 public record ReservationCreateRequest(
-        @JsonFormat(pattern = "yyyy-MM-dd") @NotNull(message = "예약할 날짜가 입력되지 않았다.") LocalDate date,
-        @NotNull(message = "예약할 시간이 입력되지 않았다.") Long timeId,
-        @NotNull(message = "예약할 테마가 입력되지 않았다.") Long themeId) {
+        @JsonFormat(pattern = "yyyy-MM-dd") @NotNull(message = "예약할 날짜가 입력되지 않았습니다.") LocalDate date,
+        @NotNull(message = "예약할 시간이 입력되지 않았습니다.") Long timeId,
+        @NotNull(message = "예약할 테마가 입력되지 않았습니다.") Long themeId) {
 
 }
