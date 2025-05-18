@@ -8,11 +8,11 @@ import roomescape.auth.infrastructure.JwtTokenProvider;
 import roomescape.auth.model.Principal;
 import roomescape.global.exception.ForbiddenException;
 
-public class AdminInterceptor implements HandlerInterceptor {
+public class AdminCheckingInterceptor implements HandlerInterceptor {
 
     private final JwtTokenProvider jwtTokenProvider;
 
-    public AdminInterceptor(JwtTokenProvider jwtTokenProvider) {
+    public AdminCheckingInterceptor(JwtTokenProvider jwtTokenProvider) {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
