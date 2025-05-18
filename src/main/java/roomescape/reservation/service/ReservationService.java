@@ -104,6 +104,10 @@ public class ReservationService {
         return reservationDao.findByMemberId(memberId);
     }
 
+    public List<Reservation> findByDateAndThemeId(LocalDate date, Long themeId) {
+        return reservationDao.findByDateAndThemeId(date, themeId);
+    }
+
     public List<Reservation> findReservationByMemberIdAndThemeIdAndStartDateAndEndDate(Long memberId, Long themeId, LocalDate startDate, LocalDate endDate) {
         validateAtLeastOneFilterProvided(memberId, themeId, startDate, endDate);
         return reservationDao.findByMemberIdAndThemeIdAndDateBetween(memberId, themeId, startDate, endDate);

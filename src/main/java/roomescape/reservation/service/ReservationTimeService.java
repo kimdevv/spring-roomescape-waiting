@@ -5,7 +5,6 @@ import java.time.LocalTime;
 import java.util.Comparator;
 import java.util.List;
 import org.springframework.stereotype.Service;
-import roomescape.reservation.dao.reservation.ReservationDao;
 import roomescape.reservation.dao.reservationTime.ReservationTimeDao;
 import roomescape.reservation.model.Reservation;
 import roomescape.reservation.model.ReservationTime;
@@ -18,11 +17,11 @@ import roomescape.global.exception.InvalidInputException;
 public class ReservationTimeService {
 
     private final ReservationTimeDao reservationTimeDao;
-    private final ReservationDao reservationDao;
+    private final ReservationService reservationService;
 
-    public ReservationTimeService(ReservationTimeDao reservationTimeDao, ReservationDao reservationDao) {
+    public ReservationTimeService(ReservationTimeDao reservationTimeDao, ReservationService reservationService) {
         this.reservationTimeDao = reservationTimeDao;
-        this.reservationDao = reservationDao;
+        this.reservationService = reservationService;
     }
 
     public ReservationTime createReservationTime(ReservationTimeCreateRequest reservationTimeCreateRequest) {
@@ -55,7 +54,7 @@ public class ReservationTimeService {
     }
 
     private List<ReservationTime> findAlreadyReservedTimeWithThemeInDate(LocalDate date, Long themeId) {
-        List<Reservation> reservationsWithThemeInDate = reservationDao.findByDateAndThemeId(date, themeId);
+        List<Reservation> reservationsWithThemeInDate = reservationService.findByDateAndThemeId(date, themeId);
         return reservationsWithThemeInDate.stream()
                 .map(Reservation::getTime)
                 .toList();
