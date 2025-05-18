@@ -24,7 +24,7 @@ public class Reservation {
     @ManyToOne
     private Theme theme;
 
-    public Reservation() {
+    protected Reservation() {
 
     }
 
