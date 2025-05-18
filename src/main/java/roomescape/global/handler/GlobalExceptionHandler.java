@@ -29,7 +29,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorResponse handleUnexpected(Exception exception) {
         exception.printStackTrace();
-        return generateErrorResponse("예상하지 못한 예외가 발생했다. 자세한 사항은 관리자에게 문의하라.");
+        return generateErrorResponse("예상하지 못한 예외가 발생했습니다. 자세한 사항은 관리자에게 문의하세요.");
     }
 
     @ExceptionHandler(value = InvalidInputException.class)
@@ -96,7 +96,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorResponse handleAlreadyEntity(AlreadyEntityException exception) {
         exception.printStackTrace();
-        return generateErrorResponse("서버 오류 발생. 관리자에게 문의하시오.");
+        return generateErrorResponse("서버 오류가 발생하였습니다. 관리자에게 문의하세요.");
     }
 
     private ErrorResponse generateErrorResponse(String message) {
