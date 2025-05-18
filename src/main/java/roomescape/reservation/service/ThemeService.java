@@ -35,7 +35,7 @@ public class ThemeService {
 
     public void deleteThemeById(Long id) {
         if (themeDao.deleteById(id) == 0) {
-            throw new InvalidInputException("존재하지 않는 테마 id이다.");
+            throw new InvalidInputException("존재하지 않는 테마 id입니다.");
         }
     }
 }

@@ -28,10 +28,10 @@ public class MemberService {
 
     private void validateDuplicateUser(String email, String name) {
         if (memberDao.existsByEmail(email)) {
-            throw new DuplicateMemberException("이미 가입된 이메일이다.");
+            throw new DuplicateMemberException("이미 가입된 이메일입니다.");
         }
         if (memberDao.existsByName(name)) {
-            throw new DuplicateMemberException("이미 존재하는 이름이다.");
+            throw new DuplicateMemberException("이미 존재하는 이름입니다.");
         }
     }
 

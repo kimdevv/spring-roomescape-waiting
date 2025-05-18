@@ -49,7 +49,7 @@ class MemberServiceTest {
         // Then
         assertThatThrownBy(() -> memberService.createUser(memberCreateRequest2))
                 .isInstanceOf(DuplicateMemberException.class)
-                .hasMessage("이미 존재하는 이름이다.");
+                .hasMessage("이미 존재하는 이름입니다.");
     }
 
     @Test
@@ -63,6 +63,6 @@ class MemberServiceTest {
         // Then
         assertThatThrownBy(() -> memberService.createUser(memberCreateRequest2))
                 .isInstanceOf(DuplicateMemberException.class)
-                .hasMessage("이미 가입된 이메일이다.");
+                .hasMessage("이미 가입된 이메일입니다.");
     }
 }

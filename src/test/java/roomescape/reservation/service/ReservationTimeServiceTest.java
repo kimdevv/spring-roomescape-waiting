@@ -87,6 +87,6 @@ public class ReservationTimeServiceTest {
         // Then
         assertThatThrownBy(() -> reservationTimeService.deleteReservationTimeById(500L))
                 .isInstanceOf(InvalidInputException.class)
-                .hasMessage("존재하지 않는 예약시간 id이다.");
+                .hasMessage("존재하지 않는 예약시간 id입니다.");
     }
 }

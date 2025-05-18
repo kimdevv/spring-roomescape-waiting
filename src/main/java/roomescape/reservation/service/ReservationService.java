@@ -59,7 +59,7 @@ public class ReservationService {
         LocalDateTime now = LocalDateTime.now(ZoneId.of(GlobalConstant.TIME_ZONE));
         if (date.isBefore(now.toLocalDate()) ||
                 (date.isEqual(now.toLocalDate()) && time.isBefore(now.toLocalTime()))) {
-            throw new NotCorrectDateTimeException("지나간 날짜와 시간에 대한 예약 생성은 불가능하다.");
+            throw new NotCorrectDateTimeException("지나간 날짜와 시간에 대한 예약 생성은 불가능합니다.");
         }
     }
 
@@ -111,13 +111,13 @@ public class ReservationService {
 
     private void validateAtLeastOneFilterProvided(Long memberId, Long themeId, LocalDate startDate, LocalDate endDate) {
         if (memberId == null && themeId == null && startDate == null && endDate == null) {
-            throw new InvalidInputException("필터링할 조건을 하나 이상 입력하라.");
+            throw new InvalidInputException("필터링할 조건을 하나 이상 입력해 주세요.");
         }
     }
 
     public void deleteReservationById(Long id) {
         if (reservationDao.deleteById(id) == 0) {
-            throw new InvalidInputException("존재하지 않는 예약 id이다.");
+            throw new InvalidInputException("존재하지 않는 예약 id입니다.");
         }
     }
 

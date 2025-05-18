@@ -54,7 +54,7 @@ public class ReservationServiceTest {
         // When & Then
         assertThatThrownBy(() -> reservationService.createReservationAfterNow(request, member.getId()))
                 .isInstanceOf(NotCorrectDateTimeException.class)
-                .hasMessage("지나간 날짜와 시간에 대한 예약 생성은 불가능하다.");
+                .hasMessage("지나간 날짜와 시간에 대한 예약 생성은 불가능합니다.");
     }
 
     @Test

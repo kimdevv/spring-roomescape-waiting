@@ -67,6 +67,6 @@ class ThemeServiceTest {
         // When & Then
         assertThatThrownBy(() -> themeService.deleteThemeById(50L))
                 .isInstanceOf(InvalidInputException.class)
-                .hasMessage("존재하지 않는 테마 id이다.");
+                .hasMessage("존재하지 않는 테마 id입니다.");
     }
 }

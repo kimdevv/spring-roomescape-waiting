@@ -63,7 +63,7 @@ public class ReservationTimeService {
 
     public void deleteReservationTimeById(Long id) {
         if (reservationTimeDao.deleteById(id) == 0) {
-            throw new InvalidInputException("존재하지 않는 예약시간 id이다.");
+            throw new InvalidInputException("존재하지 않는 예약시간 id입니다.");
         }
     }
 }
