@@ -50,4 +50,20 @@ public class WaitingController {
                 .toList();
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteWaiting(@PathVariable Long id) {
+        waitingService.deleteWaitingById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/apply")
+    public ResponseEntity<ReservationGetResponse> applyWaiting(@RequestBody WaitingApplyRequest waitingApplyRequest) {
+        Reservation createdReservation = waitingService.apply(waitingApplyRequest);
+        return ResponseEntity.created(URI.create("/reservations/" + createdReservation.getId())).body(new ReservationGetResponse(
+                createdReservation.getId(),
+                createdReservation.getMember().getName(),
+                createdReservation.getDate(),
+                createdReservation.getTime().getStartAt(),
+                createdReservation.getTheme().getName()));
+    }
 }

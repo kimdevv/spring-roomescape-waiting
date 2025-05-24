@@ -17,10 +17,6 @@ public class ThemeService {
         this.themeDao = themeDao;
     }
 
-    public List<Theme> findAllThemes() {
-        return themeDao.findAll();
-    }
-
     public Theme createTheme(ThemeCreateRequest request) {
         validateDuplicateName(request);
         Theme theme = new Theme(null, request.name(), request.description(), request.thumbnail());
@@ -31,6 +27,15 @@ public class ThemeService {
         if (themeDao.existsByName(themeCreateRequest.name())) {
             throw new DuplicateThemeException();
         }
+    }
+
+    public List<Theme> findAllThemes() {
+        return themeDao.findAll();
+    }
+
+    public Theme findThemeById(Long id) {
+        return themeDao.findById(id)
+                .orElseThrow(() -> new InvalidInputException("존재하지 않는 테마 id입니다."));
     }
 
     public void deleteThemeById(Long id) {

@@ -26,7 +26,7 @@ function render(data) {
         const id = item.id;
         const name = item.name;
         const theme = item.themeName;
-        const date = item.date;
+        const date = item.startAt;
         const startAt = item.time;
 
         row.insertCell(0).textContent = id;            // 예약 대기 id

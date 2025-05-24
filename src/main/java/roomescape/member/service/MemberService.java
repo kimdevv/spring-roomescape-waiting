@@ -2,6 +2,7 @@ package roomescape.member.service;
 
 import org.springframework.stereotype.Service;
 import roomescape.auth.exception.InvalidCredentialsException;
+import roomescape.global.exception.InvalidInputException;
 import roomescape.member.dao.MemberDao;
 import roomescape.member.model.Member;
 import roomescape.member.dto.request.MemberCreateRequest;
@@ -37,6 +38,11 @@ public class MemberService {
 
     public List<Member> findAllMembers() {
         return memberDao.findAll();
+    }
+
+    public Member findMemberById(Long id) {
+        return memberDao.findById(id)
+                .orElseThrow(() -> new InvalidInputException("존재하지 않는 멤버 id입니다."));
     }
 
     public Member findByEmailAndPassword(String email, String password) {

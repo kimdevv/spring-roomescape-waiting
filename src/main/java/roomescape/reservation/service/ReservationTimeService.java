@@ -40,6 +40,11 @@ public class ReservationTimeService {
         return reservationTimeDao.findAll();
     }
 
+    public ReservationTime findReservationTimeById(Long id) {
+        return reservationTimeDao.findById(id)
+                .orElseThrow(() -> new InvalidInputException("존재하지 않는 예약시간 id입니다."));
+    }
+
     public List<ReservationTimeWithIsBookedGetResponse> findReservationTimeByDateAndThemeIdWithIsBooked(LocalDate date, Long themeId) {
         List<ReservationTime> reservationTimes = reservationTimeDao.findAll();
         List<ReservationTime> reservedTimes = findAlreadyReservedTimeWithThemeInDate(date, themeId);
