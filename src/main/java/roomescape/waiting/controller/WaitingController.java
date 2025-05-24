@@ -33,15 +33,15 @@ public class WaitingController {
     }
 
     @PostMapping
-    public ResponseEntity<WaitingGetResponse> addWaiting(@RequestBody @Valid WaitingCreateRequest waitingCreateRequest,
-                                                         @Login Principal principal) {
+    public ResponseEntity<WaitingGetResponse> createWaiting(@RequestBody @Valid WaitingCreateRequest waitingCreateRequest,
+                                                            @Login Principal principal) {
         Waiting waiting = waitingService.createWaiting(waitingCreateRequest, principal.memberId());
         WaitingGetResponse waitingResponseDto = new WaitingGetResponse(waiting.getId(), waiting.getName(), waiting.getStartAt(), waiting.getDate(), waiting.getThemeName());
         return ResponseEntity.created(URI.create("/reservations/waiting/" + waiting.getId())).body(waitingResponseDto);
     }
 
     @GetMapping
-    public List<WaitingGetResponse> waitings() {
+    public List<WaitingGetResponse> readAllWaitings() {
         List<Waiting> waitings = waitingService.findAllWaitings();
         return waitings.stream()
                 .map(waiting -> new WaitingGetResponse(waiting.getId(), waiting.getName(), waiting.getStartAt(), waiting.getDate(), waiting.getThemeName()))
