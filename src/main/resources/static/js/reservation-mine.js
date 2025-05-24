@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     /*
-    TODO: [2´Ü°è] ³» ¿¹¾à ¸ñ·Ï Á¶È¸ ±â´É
-          endpoint ¼³Á¤
+    TODO: [2ï¿½Ü°ï¿½] ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½È¸ ï¿½ï¿½ï¿½
+          endpoint ï¿½ï¿½ï¿½ï¿½
      */
-    fetch('/reservations/mine') // ³» ¿¹¾à ¸ñ·Ï Á¶È¸ API È£Ãâ
+    fetch('/reservations/mine') // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½È¸ API È£ï¿½ï¿½
         .then(response => {
             if (response.status === 200) return response.json();
             throw new Error('Read failed');
@@ -20,8 +20,8 @@ function render(data) {
         const row = tableBody.insertRow();
 
         /*
-        TODO: [2´Ü°è] ³» ¿¹¾à ¸ñ·Ï Á¶È¸ ±â´É
-              response ¸í¼¼¿¡ ¸ÂÃç °ª ¼³Á¤
+        TODO: [2ï¿½Ü°ï¿½] ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½È¸ ï¿½ï¿½ï¿½
+              response ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
          */
         const theme = item.themeName;
         const date = item.date;
@@ -34,18 +34,18 @@ function render(data) {
         row.insertCell(3).textContent = status;
 
         /*
-        TODO: [3´Ü°è] ¿¹¾à ´ë±â ±â´É - ¿¹¾à ´ë±â Ãë¼Ò ±â´É ±¸Çö ÈÄ È°¼ºÈ­
+        TODO: [3ï¿½Ü°ï¿½] ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ - ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ È°ï¿½ï¿½È­
          */
-        if (status !== 'Reserved') { // ¿¹¾à ´ë±â »óÅÂÀÏ ¶§ ¿¹¾à ´ë±â Ãë¼Ò ¹öÆ° Ãß°¡ÇÏ´Â ÄÚµå, »óÅÂ °ªÀº º¯°æ °¡´É
+        if (status !== 'Reserved') { // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° ï¿½ß°ï¿½ï¿½Ï´ï¿½ ï¿½Úµï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             const cancelCell = row.insertCell(4);
             const cancelButton = document.createElement('button');
-            cancelButton.textContent = 'Ãë¼Ò';
+            cancelButton.textContent = 'ï¿½ï¿½ï¿½';
             cancelButton.className = 'btn btn-danger';
             cancelButton.onclick = function () {
                 requestDeleteWaiting(item.id).then(() => window.location.reload());
             };
             cancelCell.appendChild(cancelButton);
-        } else { // ¿¹¾à ¿Ï·á »óÅÂÀÏ ¶§
+        } else { // ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
             row.insertCell(4).textContent = '';
         }
     });
@@ -53,9 +53,9 @@ function render(data) {
 
 function requestDeleteWaiting(id) {
     /*
-    TODO: [3´Ü°è] ¿¹¾à ´ë±â ±â´É - ¿¹¾à ´ë±â Ãë¼Ò API È£Ãâ
+    TODO: [3ï¿½Ü°ï¿½] ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ - ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ API È£ï¿½ï¿½
      */
-    const endpoint = `/reservations/${id}`;
+    const endpoint = `/reservations/waiting/${id}`;
     return fetch(endpoint, {
         method: 'DELETE'
     }).then(response => {

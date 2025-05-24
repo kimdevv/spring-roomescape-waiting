@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import roomescape.auth.model.Principal;
 import roomescape.global.annotation.Login;
 import roomescape.reservation.dto.request.ReservationCreateRequest;
-import roomescape.reservation.dto.response.MyReservationGetResponse;
 import roomescape.reservation.dto.response.ReservationGetResponse;
 import roomescape.reservation.model.Reservation;
 import roomescape.reservation.model.Theme;
@@ -52,19 +51,6 @@ public class ReservationController {
                         reservation.getDate(),
                         reservation.getTime().getStartAt(),
                         reservation.getTheme().getName()))
-                .toList();
-    }
-
-    @GetMapping("/mine")
-    public List<MyReservationGetResponse> readMyReservations(@Login Principal principal) {
-        return reservationService.findByMemberId(principal.memberId()).stream()
-                .map(reservation -> new MyReservationGetResponse(
-                        reservation.getId(),
-                        reservation.getMember().getName(),
-                        reservation.getDate(),
-                        reservation.getTime().getStartAt(),
-                        reservation.getTheme().getName(),
-                        "Reserved"))
                 .toList();
     }
 
