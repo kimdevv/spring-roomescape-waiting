@@ -47,12 +47,11 @@ public class ReservationDaoImpl implements ReservationDao {
 
     @Override
     public int deleteById(Long id) {
-        int deleteCount = jpaReservationDao.countById(id);
-        if (deleteCount == 0) {
-            return deleteCount;
+        if (jpaReservationDao.existsById(id)) {
+            jpaReservationDao.deleteById(id);
+            return 1;
         }
-        jpaReservationDao.deleteById(id);
-        return deleteCount;
+        return 0;
     }
 
     @Override

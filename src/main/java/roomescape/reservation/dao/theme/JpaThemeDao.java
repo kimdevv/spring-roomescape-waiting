@@ -8,6 +8,4 @@ import roomescape.reservation.model.Theme;
 public interface JpaThemeDao extends JpaRepository<Theme, Long> {
 
     boolean existsByName(String name);
-
-    int countById(Long id);
 }

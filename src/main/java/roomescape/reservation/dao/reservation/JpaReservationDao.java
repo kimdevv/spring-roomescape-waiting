@@ -31,7 +31,5 @@ public interface JpaReservationDao extends JpaRepository<Reservation, Long> {
 
     List<Reservation> findByDateBetween(LocalDate startDate, LocalDate endDate);
 
-    int countById(Long id);
-
     boolean existsByDateAndTimeIdAndThemeId(LocalDate date, Long timeId, Long themeId);
 }

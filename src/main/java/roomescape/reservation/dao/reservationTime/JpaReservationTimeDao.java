@@ -10,6 +10,4 @@ import java.time.LocalTime;
 public interface JpaReservationTimeDao extends JpaRepository<ReservationTime, Long> {
 
     boolean existsByStartAt(LocalTime startAt);
-
-    int countById(Long id);
 }

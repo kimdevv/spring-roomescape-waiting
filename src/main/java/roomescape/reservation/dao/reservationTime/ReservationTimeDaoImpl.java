@@ -33,12 +33,11 @@ public class ReservationTimeDaoImpl implements ReservationTimeDao {
 
     @Override
     public int deleteById(Long id) {
-        int deleteCount = jpaReservationTimeDao.countById(id);
-        if (deleteCount == 0) {
-            return deleteCount;
+        if (jpaReservationTimeDao.existsById(id)) {
+            jpaReservationTimeDao.deleteById(id);
+            return 1;
         }
-        jpaReservationTimeDao.deleteById(id);
-        return deleteCount;
+        return 0;
     }
 
     @Override

@@ -32,12 +32,11 @@ public class ThemeDaoImpl implements ThemeDao {
 
     @Override
     public int deleteById(Long id) {
-        int deleteCount = jpaThemeDao.countById(id);
-        if (deleteCount == 0) {
-            return deleteCount;
+        if (jpaThemeDao.existsById(id)) {
+            jpaThemeDao.deleteById(id);
+            return 1;
         }
-        jpaThemeDao.deleteById(id);
-        return deleteCount;
+        return 0;
     }
 
     @Override
