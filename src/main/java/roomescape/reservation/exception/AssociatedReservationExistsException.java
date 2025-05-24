@@ -1,8 +1,11 @@
 package roomescape.reservation.exception;
 
-public class AssociatedReservationExistsException extends RuntimeException {
+import org.springframework.http.HttpStatus;
+import roomescape.global.exception.BaseCustomException;
+
+public class AssociatedReservationExistsException extends BaseCustomException {
 
     public AssociatedReservationExistsException(String message) {
-        super(message);
+        super(message, HttpStatus.CONFLICT);
     }
 }

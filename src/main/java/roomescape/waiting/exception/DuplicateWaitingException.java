@@ -1,8 +1,11 @@
 package roomescape.waiting.exception;
 
-public class DuplicateWaitingException extends RuntimeException {
+import org.springframework.http.HttpStatus;
+import roomescape.global.exception.BaseCustomException;
+
+public class DuplicateWaitingException extends BaseCustomException {
 
     public DuplicateWaitingException(String message) {
-        super(message);
+        super(message , HttpStatus.CONFLICT);
     }
 }

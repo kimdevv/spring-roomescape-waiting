@@ -1,8 +1,11 @@
 package roomescape.reservation.exception;
 
-public class NotCorrectDateTimeException extends RuntimeException {
+import org.springframework.http.HttpStatus;
+import roomescape.global.exception.BaseCustomException;
+
+public class NotCorrectDateTimeException extends BaseCustomException {
 
     public NotCorrectDateTimeException(String message) {
-        super(message);
+        super(message, HttpStatus.BAD_REQUEST);
     }
 }

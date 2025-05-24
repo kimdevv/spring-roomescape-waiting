@@ -1,8 +1,10 @@
 package roomescape.global.exception;
 
-public class ForbiddenException extends RuntimeException {
+import org.springframework.http.HttpStatus;
+
+public class ForbiddenException extends BaseCustomException {
 
     public ForbiddenException() {
-        super("접근 권한이 부족합니다.");
+        super("접근 권한이 부족합니다.", HttpStatus.FORBIDDEN);
     }
 }

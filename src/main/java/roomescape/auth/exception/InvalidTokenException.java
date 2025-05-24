@@ -1,8 +1,11 @@
 package roomescape.auth.exception;
 
-public class InvalidTokenException extends RuntimeException {
+import org.springframework.http.HttpStatus;
+import roomescape.global.exception.BaseCustomException;
+
+public class InvalidTokenException extends BaseCustomException {
 
     public InvalidTokenException(String message) {
-        super(message);
+        super(message, HttpStatus.BAD_REQUEST);
     }
 }

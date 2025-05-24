@@ -1,8 +1,11 @@
 package roomescape.reservation.exception;
 
-public class DuplicateTimeException extends RuntimeException {
+import org.springframework.http.HttpStatus;
+import roomescape.global.exception.BaseCustomException;
+
+public class DuplicateTimeException extends BaseCustomException {
 
     public DuplicateTimeException() {
-        super("이미 존재하는 시간입니다.");
+        super("이미 존재하는 시간입니다.", HttpStatus.CONFLICT);
     }
 }

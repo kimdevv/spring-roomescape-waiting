@@ -1,8 +1,10 @@
 package roomescape.global.exception;
 
-public class AlreadyEntityException extends RuntimeException {
+import org.springframework.http.HttpStatus;
+
+public class AlreadyEntityException extends BaseCustomException {
 
     public AlreadyEntityException(String message) {
-        super(message);
+        super(message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
