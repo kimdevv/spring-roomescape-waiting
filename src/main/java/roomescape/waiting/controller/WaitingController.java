@@ -23,7 +23,7 @@ import java.net.URI;
 import java.util.List;
 
 @Controller
-@RequestMapping("/reservations/waiting")
+@RequestMapping("/waitings")
 public class WaitingController {
 
     private final WaitingService waitingService;
