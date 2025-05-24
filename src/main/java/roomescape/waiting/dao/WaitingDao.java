@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface WaitingDao {
 
-    long save(Waiting waiting);
+    Waiting save(Waiting waiting);
 
     List<Waiting> findAll();
 

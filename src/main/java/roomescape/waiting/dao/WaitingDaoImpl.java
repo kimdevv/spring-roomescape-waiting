@@ -17,8 +17,8 @@ public class WaitingDaoImpl implements WaitingDao {
     }
 
     @Override
-    public long save(Waiting waiting) {
-        return jpaWaitingDao.save(waiting).getId();
+    public Waiting save(Waiting waiting) {
+        return jpaWaitingDao.save(waiting);
     }
 
     @Override

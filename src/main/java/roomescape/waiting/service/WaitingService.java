@@ -43,7 +43,7 @@ public class WaitingService {
         this.themeService = themeService;
     }
 
-    public long createWaiting(WaitingCreateRequest waitingCreateRequest, Long memberId) {
+    public Waiting createWaiting(WaitingCreateRequest waitingCreateRequest, Long memberId) {
         Member member = memberService.findMemberById(memberId);
         ReservationTime reservationTime = reservationTimeService.findReservationTimeById(waitingCreateRequest.timeId());
         Theme theme = themeService.findThemeById(waitingCreateRequest.themeId());
